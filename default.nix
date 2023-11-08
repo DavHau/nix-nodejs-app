@@ -2,31 +2,18 @@
 , config
 , dream2nix
 , ...
-}:
-let
-  system = config.deps.stdenv.system;
-in
-{
+}: {
   imports = [
-    dream2nix.modules.dream2nix.nodejs-package-json
-    dream2nix.modules.dream2nix.nodejs-package-lock
-    dream2nix.modules.dream2nix.nodejs-granular
+    dream2nix.modules.dream2nix.nodejs-package-json-v3
+    dream2nix.modules.dream2nix.nodejs-package-lock-v3
+    dream2nix.modules.dream2nix.nodejs-granular-v3
   ];
 
   name = "app";
-  version = "1.0.0";
-
-  nodejs-package-lock = {
-    source = lib.cleanSource ./.;
-  };
-
-  nodejs-granular = {
-    buildScript = ''
-    '';
-  };
+  version = "0.0.1";
 
   mkDerivation = {
-    src = config.nodejs-package-lock.source;
+    src = ./.;
   };
 
   deps = { nixpkgs, ... }: {
